@@ -15,7 +15,8 @@ const db=firebase.firestore();
 db.settings({timestampsInSnapshots: true});
 
 
-const bookList=document.querySelector('#cafe-list')
+const bookList=document.querySelector('#cafe-list');
+const form =document.querySelector('#add-cafe-form');
 
 //Snapshoting the db
 db.collection('Books').get().then((snapshot)=>{
@@ -27,7 +28,7 @@ db.collection('Books').get().then((snapshot)=>{
 
 // 
 
-
+// getting data
 function renderList(doc){
     let li = document.createElement('li');
     li.setAttribute('data-id',doc.id);
@@ -41,3 +42,15 @@ function renderList(doc){
     bookList.appendChild(li)
     
 }
+
+// adding data
+form.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    db.collection('Books').add({
+        name:form.name.value,
+        type:form.type.value
+    })
+    form.name.value=''
+    form.type.value=''
+})

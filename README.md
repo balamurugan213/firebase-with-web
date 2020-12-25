@@ -41,5 +41,20 @@ db.collection('Books').get().then((snapshot)=>{
     })
 })
 ```
+
 ---
 
+## Writing the database
+
+```javascript
+
+const db=firebase.firestore();
+
+db.collection('Books').add({
+        name:form.name.value,
+        type:form.type.value
+    })
+
+```
+
+---

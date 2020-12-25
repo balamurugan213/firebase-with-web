@@ -67,8 +67,10 @@ form input{
     float: left;
     width: 38%;
     margin: 0;
-    border: 0;
-    border-bottom: 1px solid #eee;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(255, 196, 0);
+    /* border-bottom: 1px solid #eee; */
     margin: 0 1%;
     padding: 10px;
     display: block;
@@ -91,7 +93,7 @@ form:after{
 
 button{
     border: 0;
-    background: #fff;
+    background: rgb(255, 217, 0);
     border-radius: 10px;
     padding: 13px;
     width: 14%;
@@ -99,5 +101,6 @@ button{
     font-weight: bold;
     font-family: ubuntu;
     letter-spacing: 1px;
-    color: #999;
+    color: rgb(0, 0, 0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
