@@ -16,25 +16,45 @@ const db= firebase.firestore();
 // update setting
 db.settings({timestampsInSnapshots: true});
 
-// get data
-db.collection('guids').get().then(snapshot =>{
-    // console.log(snapshot.docs)\
-    setupGuides(snapshot.docs);
-})
-
-
 
 // listen for auth status change
 auth.onAuthStateChanged(user =>{
     
     if(user){
         console.log("user loged-in",user)
+        // get data
+        setupUI(user);
+        db.collection('guids').onSnapshot(snapshot =>{
+            // console.log(snapshot.docs)\
+            setupGuides(snapshot.docs);
+        }, err => console.log(err.message));
+
     }
     else{
         console.log("user loged-out")
+        setupUI()
+        setupGuides([]);
     }
 })
 
+// create guide
+const createForm=document.querySelector('#create-form');
+createForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    const title=
+    db.collection('guids').add({
+        title:createForm['title'].value,
+        content:createForm['content'].value
+    }).then(()=>{
+          // close the model
+          const addModal=document.querySelector('#modal-create');
+          M.Modal.getInstance(addModal).close();
+          createForm.reset();
+    }).catch(err=>{
+        console.log(err.message)
+    })
+})
 
 //signup
 const signUpForm=document.querySelector('#signup-form');
@@ -50,10 +70,15 @@ signUpForm.addEventListener('submit',(e)=>{
     // signup user
     auth.createUserWithEmailAndPassword(mail,password).then(cred =>{
         // console.log(cred.user)
+        return db.collection('users').doc(cred.user.uid).set({
+            bio:signUpForm['signup-bio'].value
+        })
+       
+    }).then(()=>{
         const signupModal=document.querySelector('#modal-signup');
         M.Modal.getInstance(signupModal).close();
         signUpForm.reset();
-    });
+    })
 
 })
 

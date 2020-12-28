@@ -14,19 +14,19 @@
                 <img src="img/movieblogLOGO-01.svg" style="width: 180px; margin-top: 10px;">
             </a>
             <ul id="nav-mobile" class="right ">
-                <li class="logged-in">
+                <li class="logged-in" style="display:none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
                 </li>
-                <li class="logged-in">
+                <li class="logged-in" style="display:none;">
                     <a href="#" class="grey-text" id="logout">Logout</a>
                 </li>
-                <li class="logged-in">
+                <li class="logged-in" style="display:none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
                 </li>
-                <li class="logged-out">
+                <li class="logged-out" style="display:none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
                 </li>
-                <li class="logged-out">
+                <li class="logged-out" style="display:none;">
                     <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
                 </li>
                 </span>
@@ -46,6 +46,10 @@
         <div class="input-field">
           <input type="password" id="signup-password" required />
           <label for="signup-password">Choose password</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-bio" required />
+          <label for="signup-bio">One line bio</label>
         </div>
         <button class="btn yellow darken-2 z-depth-0">Sign up</button>
       </form>
